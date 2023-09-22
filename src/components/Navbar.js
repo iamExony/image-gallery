@@ -1,11 +1,23 @@
 import React, { useState } from 'react';
+import {database} from '../firebaseconfig';
+import { useNavigate } from "react-router-dom";
+import {signOut} from 'firebase/auth';
+
 
 const Navbar = ({ images, onSearch }) => {
   const [searchTerm, setSearchTerm] = useState('');
+  const history = useNavigate();
 
   const handleSearch = () => {
     onSearch(searchTerm);
   };
+
+  const handleSignOut = () => {
+    signOut(database).then(val =>{
+      console.log(val, "val")
+      history('/')
+    })
+  }
 
   return (
     <nav className="bg-black p-4">
@@ -27,8 +39,10 @@ const Navbar = ({ images, onSearch }) => {
               Search
             </button>
           </div>
-          <button className="bg-white text-blue-500 px-4 py-2 rounded-md hover:bg-blue-100">
-            Sign In
+          <button 
+          onClick={handleSignOut}
+          className="bg-white text-blue-500 px-4 py-2 rounded-md hover:bg-blue-100">
+            Sign Out
           </button>
         </div>
       </div>
