@@ -1,5 +1,4 @@
 import React, {useState} from 'react'
-import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import './App.css';
 import Navbar from './Navbar';
 
@@ -95,11 +94,8 @@ function App() {
     <div className="App">
         <Navbar images={imagesData} onSearch={handleSearch} />
             <h1 className="text-2xl font-semibold mb-4">Image Gallery</h1>
-            <DragDropContext>
-                <Draggable droppableId='characters'>
       <div className="w-11/12 mx-auto grid grid-cols-3 gap-4">
         {imagesData.map((image) => (
-            <Draggable>
           <div key={image.id} className="relative aspect-w-3 aspect-h-4">
             <img
               src={image.imgsrc}
@@ -110,12 +106,8 @@ function App() {
               {image.title}
             </p>
           </div>
-          </Draggable>
-        
         ))}
       </div>  
-      </Draggable>
-      </DragDropContext>
     </div>
   );
 }
