@@ -1,8 +1,6 @@
-// Inside SortableUser.js
-
-import React, { useState } from "react";
-import { useSortable, CSS } from "@dnd-kit/sortable";
-import Modal from "./Modal"; // Import the Modal component
+import React, { useState, useEffect } from 'react';
+import { useSortable, CSS } from '@dnd-kit/sortable';
+import Modal from './Modal'; // Import the Modal component
 
 const SortableUser = ({ user }) => {
   const {
@@ -16,37 +14,50 @@ const SortableUser = ({ user }) => {
   const style = {
     transition,
     transform: CSS.Transform.toString(transform),
-    width: "100%",
-    height: "100%",
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "center",
-    alignItems: "center",
-    overflow: "hidden",
-    textAlign: "center",
-    position: "relative", // Add relative positioning for overlay
+    width: '100%',
+    height: '100%',
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+    overflow: 'hidden',
+    textAlign: 'center',
+    position: 'relative', // Add relative positioning for overlay
   };
 
   const [isHovered, setIsHovered] = useState(false); // Track hover state
   const [isModalOpen, setIsModalOpen] = useState(false); // Track modal state
 
   const overlayStyle = {
-    position: "absolute",
+    position: 'absolute',
     top: 0,
     left: 0,
-    width: "100%",
-    height: "100%",
-    background: "rgba(0, 0, 0, 0.5)", // Transparent black overlay
+    width: '100%',
+    height: '100%',
+    background: 'rgba(0, 0, 0, 0.5)', // Transparent black overlay
     opacity: isHovered ? 1 : 0, // Show overlay on hover
-    transition: "opacity 0.3s", // Smooth transition
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    color: "white", // Title text color
-    fontSize: "1.5rem", // Title font size
-    fontWeight: "bold", // Title font weight
-    cursor: "pointer", // Add pointer cursor for clickable effect
+    transition: 'opacity 0.3s', // Smooth transition
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    color: 'white', // Title text color
+    fontSize: '1.5rem', // Title font size
+    fontWeight: 'bold', // Title font weight
+    cursor: 'pointer', // Add pointer cursor for clickable effect
   };
+
+  useEffect(() => {
+    // Add event listener to update hover state on window resize
+    const handleResize = () => {
+      setIsHovered(false); // Reset hover state on resize
+    };
+
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
 
   return (
     <div
@@ -59,16 +70,21 @@ const SortableUser = ({ user }) => {
       onMouseLeave={() => setIsHovered(false)} // Set isHovered to false on mouse leave
       onClick={() => setIsModalOpen(true)} // Open modal when clicked
     >
-      {/* ... (rest of your code remains the same) */}
-      {/* Overlay with title */}
-      <div style={overlayStyle}>{user.title}</div>
-
-      {/* Modal */}
-      <Modal
-        isOpen={isModalOpen}
-        onClose={() => setIsModalOpen(false)}
-        imgSrc={user.imgsrc}
+      {/* Apply responsive classes to the image element */}
+      <img
+        src={user.imgsrc}
+        alt={user.title}
+        className="user-image max-w-full h-auto" // Make the image responsive
+        onLoad={() => userLoaded(user.id)} // Call userLoaded when the image is fully loaded
       />
+
+      {/* Display title conditionally based on hover */}
+      {isHovered && (
+        <div style={overlayStyle}>
+          {user.title}
+        </div>
+      )}
+
     </div>
   );
 };

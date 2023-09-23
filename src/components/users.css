@@ -52,4 +52,27 @@ transition: opacity 0.3s ease; /* Add a smooth transition effect */
   opacity: 1; /* Make the title visible on hover */
 }
 
+/* Base styles for all screen sizes */
+
+/* Mobile devices (up to 767px) */
+@media (max-width: 767px) {
+  .grid-container {
+    grid-template-columns: 1fr; /* One column for tablet devices */
+  }
+
+}
+
+/* Tablet devices (768px to 1023px) */
+@media (min-width: 768px) and (max-width: 1023px) {
+  /* Add your tablet-specific styles here */
+  .user-container {
+    /* Tablet-specific styles for user containers */
+  }
+
+  .user-image {
+    /* Tablet-specific styles for user images */
+  }
+
+  /* Other tablet-specific styles */
+}
 

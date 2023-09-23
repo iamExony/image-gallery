@@ -1,10 +1,10 @@
 import React from 'react'
 import Navbar from './Navbar'
-import Users from './imgs'
+import Users from './imgs' 
 
 const Home = () => {
   return (
-    <div className=''>
+    <div className=''> 
         <Navbar/>
        <Users />
     

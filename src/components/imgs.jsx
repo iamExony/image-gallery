@@ -80,7 +80,7 @@ const Users = () => {
   };
 
   return (
-    <div className="users">
+    <div className="users"> 
       <div className="grid-container">
         <DndContext collisionDetection={closestCenter} onDragEnd={onDragEnd}>
           <SortableContext items={users} strategy={verticalListSortingStrategy}>
