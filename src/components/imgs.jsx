@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import "./users.css";
 import { data } from "./data";
 import { closestCenter, DndContext } from "@dnd-kit/core";
@@ -21,18 +21,37 @@ const SortableUser = ({ user }) => {
   const style = {
     transition,
     transform: CSS.Transform.toString(transform),
+    width: "100%",
+    height: "100%",
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center",
+    overflow: "hidden",
+    textAlign: "center",
   };
 
   return (
-    <img
+    <div
       ref={setNodeRef}
       style={style}
       {...attributes}
       {...listeners}
-      className="user"
-      src={user.imgsrc}
+      className="user-container"
     >
-    </img>
+      <img
+        src={user.imgsrc}
+        alt={user.title}
+        style={{
+          objectFit: "cover",
+          width: "100%",
+          height: "100%", // Adjust the height as needed
+          borderRadius: "20px",
+        }}
+        className="user-image"
+      />
+      <div className="user-title">{user.title}</div>
+    </div>
   );
 };
 
@@ -40,9 +59,9 @@ const Users = () => {
   const [users, setUsers] = useState(data);
   const [inputValue, setInputValue] = useState("");
   const addUser = () => {
-  const  newUser = {
+    const newUser = {
       id: Date.now().toString(),
-      name: inputValue,
+      title: inputValue,
     };
     setInputValue("");
     setUsers((users) => [...users, newUser]);
@@ -62,13 +81,11 @@ const Users = () => {
 
   return (
     <div className="users">
-      <div>
+      <div className="grid-container">
         <DndContext collisionDetection={closestCenter} onDragEnd={onDragEnd}>
           <SortableContext items={users} strategy={verticalListSortingStrategy}>
-            {users.map((user) => (  
-
+            {users.map((user) => (
               <SortableUser key={user.id} user={user} />
-     
             ))}
           </SortableContext>
         </DndContext>
@@ -76,4 +93,5 @@ const Users = () => {
     </div>
   );
 };
+
 export default Users;

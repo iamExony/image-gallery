@@ -1,19 +1,55 @@
 .users {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr); /* Three equal-width columns */
-    grid-template-rows: repeat(4, 1fr);    /* Four equal-height rows */
-    gap: 10px; /* Gap between grid items */
-    width: 100%; /* Make the grid container full width */
-    height: 400px; /* Set a fixed height for the grid container */
-  }
-  
-  .user {
-    background-color: #ccc;
-    border: 1px solid #999;
-    padding: 10px;
-    text-align: center;
-  }
-  
-  .users-form {
-    margin-bottom: 20px;
-  }
+  width: 100%; /* Make the grid container full width */
+  height: 400px; /* Set a fixed height for the grid container */
+}
+.grid-container {
+  width: 80%;
+  margin: 20px auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* Adjust the number of columns as needed */
+  grid-gap: 20px; /* Adjust the gap between items as needed */
+}
+
+.users-form {
+  margin-bottom: 20px;
+}
+.user-image:hover,
+.user-title:hover {
+opacity: 0.7; /* Adjust the opacity value as needed */
+transition: opacity 0.3s ease; /* Add a smooth transition effect */
+}
+.user-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+/* Style for the user image */
+.user-image {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+}
+
+/* Style for the user title (overlay) */
+.user-title {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgba(0, 0, 0, 0.5); /* Transparent black background for the title */
+  color: white; /* Title text color */
+  font-size: 1.5rem; /* Title font size */
+  font-weight: bold; /* Title font weight */
+  padding: 8px 16px; /* Add padding to the title */
+  border-radius: 4px; /* Add rounded corners to the title */
+  opacity: 0; /* Initially hidden */
+  transition: opacity 0.3s; /* Smooth opacity transition */
+}
+
+/* Style for the user title when visible (hovered) */
+.user-container:hover .user-title {
+  opacity: 1; /* Make the title visible on hover */
+}
+
+
