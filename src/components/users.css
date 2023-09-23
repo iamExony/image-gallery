@@ -1,0 +1,19 @@
+.users {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* Three equal-width columns */
+    grid-template-rows: repeat(4, 1fr);    /* Four equal-height rows */
+    gap: 10px; /* Gap between grid items */
+    width: 100%; /* Make the grid container full width */
+    height: 400px; /* Set a fixed height for the grid container */
+  }
+  
+  .user {
+    background-color: #ccc;
+    border: 1px solid #999;
+    padding: 10px;
+    text-align: center;
+  }
+  
+  .users-form {
+    margin-bottom: 20px;
+  }

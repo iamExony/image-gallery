@@ -1,12 +1,13 @@
 import React from 'react'
-import Images from './images'
 import Navbar from './Navbar'
+import Users from './imgs'
 
 const Home = () => {
   return (
     <>
         <Navbar/>
-        <Images />
+       <Users />
+    
     </>
   )
 }
