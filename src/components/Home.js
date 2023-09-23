@@ -4,11 +4,11 @@ import Users from './imgs'
 
 const Home = () => {
   return (
-    <>
+    <div className=''>
         <Navbar/>
        <Users />
     
-    </>
+    </div>
   )
 }
 

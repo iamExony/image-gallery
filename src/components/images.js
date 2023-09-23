@@ -80,7 +80,7 @@ const imagesData = [
 
     return(
         <>
-        <div className="w-11/12 mx-auto my-12 grid grid-cols-3 gap-4">
+        <div className="w-11/12 mx-auto my-12 grid grid-cols-3 gap-4 bg-slate-200">
         {imagesData.map((image) => (
           <div key={image.id} className="relative aspect-w-3 aspect-h-4">
             <img
