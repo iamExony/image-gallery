@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useSortable, CSS } from '@dnd-kit/sortable';
 import Modal from './Modal'; // Import the Modal component
 
@@ -12,7 +12,7 @@ const SortableUser = ({ user }) => {
   } = useSortable({ id: user.id });
 
   const style = {
-    transition,
+    transition: `transform ${transition.duration}ms ${transition.timingFunction}`,
     transform: CSS.Transform.toString(transform),
     width: '100%',
     height: '100%',
@@ -36,7 +36,7 @@ const SortableUser = ({ user }) => {
     height: '100%',
     background: 'rgba(0, 0, 0, 0.5)', // Transparent black overlay
     opacity: isHovered ? 1 : 0, // Show overlay on hover
-    transition: 'opacity 0.3s', // Smooth transition
+    transition: 'opacity 0.3s', // Smooth opacity transition
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
@@ -45,19 +45,6 @@ const SortableUser = ({ user }) => {
     fontWeight: 'bold', // Title font weight
     cursor: 'pointer', // Add pointer cursor for clickable effect
   };
-
-  useEffect(() => {
-    // Add event listener to update hover state on window resize
-    const handleResize = () => {
-      setIsHovered(false); // Reset hover state on resize
-    };
-
-    window.addEventListener('resize', handleResize);
-
-    return () => {
-      window.removeEventListener('resize', handleResize);
-    };
-  }, []);
 
   return (
     <div
@@ -74,7 +61,7 @@ const SortableUser = ({ user }) => {
       <img
         src={user.imgsrc}
         alt={user.title}
-        className="user-image max-w-full h-auto" // Make the image responsive
+        className="user-image max-w-full h-auto transition-transform transform-gpu hover:scale-105" // Add hover scaling transition effect
         onLoad={() => userLoaded(user.id)} // Call userLoaded when the image is fully loaded
       />
 
